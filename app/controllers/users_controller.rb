@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :followers, :followings]
   before_action :correct_user, only: [:edit, :update]
-  
-  
-  
+
   def show 
+    @microposts = @user.microposts.order(created_at: :desc)
   end
 
   def new
@@ -21,6 +20,7 @@ class UsersController < ApplicationController
     end
   end
   
+
   def edit
   end
 
@@ -32,11 +32,20 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def followings
+    @users = @user.following_users
+  end
+
+  def followers
+    @users = @user.follower_users
+  end
+  
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :password, :location,
                                  :password_confirmation)
   end
   
@@ -47,4 +56,5 @@ class UsersController < ApplicationController
   def correct_user
     redirect_to root_path if @user != current_user
   end
+  
 end
