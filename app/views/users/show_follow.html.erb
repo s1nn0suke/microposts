@@ -3,7 +3,7 @@
     <%= render 'user_info' %>
   </aside>
   <div class="col-md-8">
-    <h3>Followings</h3>
+    <h3><%= @title %></h3>
     
     <% @users.each do |user| %>
       <%= link_to user.name, user %>
