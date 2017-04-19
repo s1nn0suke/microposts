@@ -1,2 +1,9 @@
 <h3>Followers</h3>
-<%= link_to,followers_user_path %>
+
+<p><%= link_to "show", @user %> | 
+<%= link_to "followings", followings_user_path(@user) %> | 
+<%= link_to "followers", followers_user_path(@user) %></p>
+
+<% @users.each do |user| %>
+  <%= link_to user.name, user %>
+<% end %>
